@@ -50,7 +50,7 @@ function Products() {
             params.append("limit", limit);
 
             const response = await fetch(
-                `http://localhost:3000/api/products?${params.toString()}`
+                `${import.meta.env.VITE_API_URL}/api/products?${params.toString()}`
             );
 
             const data = await response.json();

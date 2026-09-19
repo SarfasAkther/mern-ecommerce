@@ -14,7 +14,7 @@ function Orders() {
     const getOrders = async () => {
         try {
             const response = await fetch(
-                "http://localhost:3000/api/orders/my",
+                `${import.meta.env.VITE_API_URL}/api/orders/my`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -46,7 +46,7 @@ function Orders() {
 
         try {
             const response = await fetch(
-                `http://localhost:3000/api/orders/${orderId}/cancel`,
+                `${import.meta.env.VITE_API_URL}/api/orders/${orderId}/cancel`,
                 {
                     method: "PUT",
                     headers: {

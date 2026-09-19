@@ -50,7 +50,7 @@ function Checkout() {
     const placeCODOrder = async () => {
 
         const response = await fetch(
-            "http://localhost:3000/api/orders",
+            `${import.meta.env.VITE_API_URL}/api/orders`,
             {
                 method: "POST",
 
@@ -118,7 +118,7 @@ function Checkout() {
         // Step 1: Create Razorpay order
 
         const response = await fetch(
-            "http://localhost:3000/api/payment/create-order",
+            `${import.meta.env.VITE_API_URL}/api/payment/create-order`,
             {
                 method: "POST",
 
@@ -182,7 +182,7 @@ function Checkout() {
 
                     const verifyResponse =
                         await fetch(
-                            "http://localhost:3000/api/payment/verify",
+                            `${import.meta.env.VITE_API_URL}/api/payment/verify`,
                             {
                                 method: "POST",
 

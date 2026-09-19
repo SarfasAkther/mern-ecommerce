@@ -24,7 +24,7 @@ function Profile() {
     const getProfile = async () => {
         try {
             const response = await fetch(
-                "http://localhost:3000/api/auth/profile",
+                `${import.meta.env.VITE_API_URL}/api/auth/profile`,
                 {
                     headers: {
                         Authorization: "Bearer " + token
@@ -55,7 +55,7 @@ function Profile() {
 
         try {
             const response = await fetch(
-                "http://localhost:3000/api/auth/profile",
+                `${import.meta.env.VITE_API_URL}/api/auth/profile`,
                 {
                     method: "PUT",
 
@@ -113,7 +113,7 @@ function Profile() {
 
         try {
             const response = await fetch(
-                "http://localhost:3000/api/auth/change-password",
+                `${import.meta.env.VITE_API_URL}/api/auth/change-password`,
                 {
                     method: "PUT",
 

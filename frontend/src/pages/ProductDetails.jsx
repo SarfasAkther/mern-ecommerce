@@ -37,7 +37,7 @@ function ProductDetails() {
     const getProduct = async () => {
         try {
             const response = await fetch(
-                `http://localhost:3000/api/products/${id}`
+                `${import.meta.env.VITE_API_URL}/api/products/${id}`
             );
 
             const data = await response.json();
@@ -54,7 +54,7 @@ function ProductDetails() {
     const fetchReviews = async () => {
         try {
             const response = await fetch(
-                `http://localhost:3000/api/reviews/${id}`
+                `${import.meta.env.VITE_API_URL}/api/reviews/${id}`
             );
 
             const data = await response.json();
@@ -76,7 +76,7 @@ function ProductDetails() {
     const fetchRelatedProducts = async () => {
         try {
             const response = await fetch(
-                `http://localhost:3000/api/products/${id}/related`
+                `${import.meta.env.VITE_API_URL}/api/products/${id}/related`
             );
 
             const data = await response.json();
@@ -112,7 +112,7 @@ function ProductDetails() {
 
         try {
             const response = await fetch(
-                "http://localhost:3000/api/reviews",
+                `${import.meta.env.VITE_API_URL}/api/reviews`,
                 {
                     method: "POST",
                     headers: {

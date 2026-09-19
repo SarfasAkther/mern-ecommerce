@@ -21,7 +21,7 @@ function ProductCard({ product }) {
 
         try {
             const response = await fetch(
-                "http://localhost:3000/api/wishlist",
+                `${import.meta.env.VITE_API_URL}/api/wishlist`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -71,7 +71,7 @@ function ProductCard({ product }) {
             if (isWishlisted) {
                 // Remove from wishlist
                 response = await fetch(
-                    `http://localhost:3000/api/wishlist/${product._id}`,
+                    `${import.meta.env.VITE_API_URL}/api/wishlist/${product._id}`,
                     {
                         method: "DELETE",
                         headers: {
@@ -83,7 +83,7 @@ function ProductCard({ product }) {
             } else {
                 // Add to wishlist
                 response = await fetch(
-                    "http://localhost:3000/api/wishlist",
+                    `${import.meta.env.VITE_API_URL}/api/wishlist`,
                     {
                         method: "POST",
                         headers: {

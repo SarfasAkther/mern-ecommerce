@@ -21,7 +21,7 @@ function AdminDashboard() {
         try {
             // Get products
             const productsResponse = await fetch(
-                "http://localhost:3000/api/products"
+                `${import.meta.env.VITE_API_URL}/api/products`
             );
 
             const productsData =
@@ -29,7 +29,7 @@ function AdminDashboard() {
 
             // Get orders
             const ordersResponse = await fetch(
-                "http://localhost:3000/api/orders",
+                `${import.meta.env.VITE_API_URL}/api/orders`,
                 {
                     headers: {
                         Authorization:
@@ -43,7 +43,7 @@ function AdminDashboard() {
 
             // Get analytics
             const analyticsResponse = await fetch(
-                "http://localhost:3000/api/admin/analytics",
+                `${import.meta.env.VITE_API_URL}/api/admin/analytics`,
                 {
                     headers: {
                         Authorization:
@@ -57,7 +57,7 @@ function AdminDashboard() {
 
             // Get low-stock products
             const lowStockResponse = await fetch(
-                "http://localhost:3000/api/admin/low-stock",
+                `${import.meta.env.VITE_API_URL}/api/admin/low-stock`,
                 {
                     headers: {
                         Authorization:

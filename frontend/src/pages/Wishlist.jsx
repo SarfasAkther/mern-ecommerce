@@ -15,7 +15,7 @@ function Wishlist() {
     const getWishlist = async () => {
         try {
             const response = await fetch(
-                "http://localhost:3000/api/wishlist",
+                `${import.meta.env.VITE_API_URL}/api/wishlist`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -53,7 +53,7 @@ function Wishlist() {
     const removeFromWishlist = async (productId) => {
         try {
             const response = await fetch(
-                `http://localhost:3000/api/wishlist/${productId}`,
+                `${import.meta.env.VITE_API_URL}/api/wishlist/${productId}`,
                 {
                     method: "DELETE",
                     headers: {

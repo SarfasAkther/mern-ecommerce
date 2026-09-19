@@ -15,7 +15,7 @@ function AdminOrders() {
     const getOrders = async () => {
         try {
             const response = await fetch(
-                "http://localhost:3000/api/orders",
+                `${import.meta.env.VITE_API_URL}/api/orders`,
                 {
                     headers: {
                         Authorization:
@@ -49,7 +49,7 @@ function AdminOrders() {
     ) => {
         try {
             const response = await fetch(
-                `http://localhost:3000/api/orders/${orderId}/status`,
+                `${import.meta.env.VITE_API_URL}/api/orders/${orderId}/status`,
                 {
                     method: "PUT",
 

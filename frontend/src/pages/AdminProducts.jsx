@@ -27,7 +27,7 @@ function AdminProducts() {
 const getProducts = async () => {
     try {
         const response = await fetch(
-            "http://localhost:3000/api/products"
+            `${import.meta.env.VITE_API_URL}/api/products`
         );
 
         const data = await response.json();
@@ -84,7 +84,7 @@ const getProducts = async () => {
 
         try {
             const response = await fetch(
-                "http://localhost:3000/api/products/upload",
+                `${import.meta.env.VITE_API_URL}/api/products/upload`,
                 {
                     method: "POST",
                     headers: {
@@ -129,8 +129,8 @@ const getProducts = async () => {
         }
 
         const url = editingId
-            ? `http://localhost:3000/api/products/${editingId}`
-            : "http://localhost:3000/api/products";
+            ? `${import.meta.env.VITE_API_URL}/api/products/${editingId}`
+            : `${import.meta.env.VITE_API_URL}/api/products`;
 
         const method = editingId ? "PUT" : "POST";
 
@@ -209,7 +209,7 @@ const getProducts = async () => {
 
         try {
             const response = await fetch(
-                `http://localhost:3000/api/products/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/products/${id}`,
                 {
                     method: "DELETE",
                     headers: {
