@@ -1,13 +1,14 @@
 
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
-import { getCategories } from "../../../backend/controllers/productController";
 
 function Products() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
     const [search, setSearch] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+
     const [category, setCategory] = useState("");
 
     const [minPrice, setMinPrice] = useState("");
@@ -20,17 +21,23 @@ function Products() {
 
     const limit = 8;
 
+    // Get categories when the page loads
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    // Get products whenever filters or page changes
     useEffect(() => {
         getProducts();
-        getCategories();
-    }, [page]);
+    }, [page, searchQuery, category, minPrice, maxPrice, sort]);
 
+    // Get products
     const getProducts = async () => {
         try {
             const params = new URLSearchParams();
 
-            if (search) {
-                params.append("search", search);
+            if (searchQuery) {
+                params.append("search", searchQuery);
             }
 
             if (category) {
@@ -67,45 +74,11 @@ function Products() {
             setTotalPages(data.totalPages);
 
         } catch (error) {
-            console.log(
-                "Error fetching products:",
-                error
-            );
+            console.log("Error fetching products:", error);
         }
     };
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-
-        setPage(1);
-        getProducts();
-    };
-
-    const handleCategoryChange = (e) => {
-        setCategory(e.target.value);
-        setPage(1);
-    };
-
-    const handleSortChange = (e) => {
-        setSort(e.target.value);
-        setPage(1);
-    };
-
-    const handleApplyPrice = (e) => {
-        e.preventDefault();
-
-        setPage(1);
-        getProducts();
-    };
-
-    const clearFilters = () => {
-        setSearch("");
-        setCategory("");
-        setMinPrice("");
-        setMaxPrice("");
-        setSort("");
-        setPage(1);
-    };
+    // Get categories
     const getCategories = async () => {
         try {
             const response = await fetch(
@@ -120,8 +93,48 @@ function Products() {
             }
 
             setCategories(data);
+
         } catch (error) {
+            console.log("Error fetching categories:", error);
         }
+    };
+
+    // Search
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        setPage(1);
+        setSearchQuery(search);
+    };
+
+    // Category
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
+        setPage(1);
+    };
+
+    // Sort
+    const handleSortChange = (e) => {
+        setSort(e.target.value);
+        setPage(1);
+    };
+
+    // Price
+    const handleApplyPrice = (e) => {
+        e.preventDefault();
+
+        setPage(1);
+    };
+
+    // Clear all filters
+    const clearFilters = () => {
+        setSearch("");
+        setSearchQuery("");
+        setCategory("");
+        setMinPrice("");
+        setMaxPrice("");
+        setSort("");
+        setPage(1);
     };
 
     return (
