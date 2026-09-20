@@ -1,9 +1,11 @@
 
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import { getCategories } from "../../../backend/controllers/productController";
 
 function Products() {
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState("");
@@ -20,6 +22,7 @@ function Products() {
 
     useEffect(() => {
         getProducts();
+        getCategories();
     }, [page]);
 
     const getProducts = async () => {
@@ -103,6 +106,23 @@ function Products() {
         setSort("");
         setPage(1);
     };
+    const getCategories = async () => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/products/categories`
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                console.log(data.message);
+                return;
+            }
+
+            setCategories(data);
+        } catch (error) {
+        }
+    };
 
     return (
         <div
@@ -173,13 +193,11 @@ function Products() {
                         All Categories
                     </option>
 
-                    <option value="Shirt">
-                        Shirt
-                    </option>
-
-                    <option value="Shoes">
-                        Shoes
-                    </option>
+                    {categories.map((cat) => (
+                        <option key={cat} value={cat}>
+                            {cat}
+                        </option>
+                    ))}
                 </select>
 
                 {/* Minimum Price */}

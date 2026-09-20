@@ -91,6 +91,18 @@ const getProducts = async (req, res) => {
     }
 };
 
+const getCategories = async (req, res) => {
+    try {
+        const categories = await Product.distinct("category");
+
+        res.json(categories);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
 
 const createProduct = async (req, res) => {
     try {
@@ -239,6 +251,7 @@ const getRelatedProducts = async (req, res) => {
 
 module.exports = {
     getProducts,
+    getCategories,
     createProduct,
     getProductById,
     updateProduct,
