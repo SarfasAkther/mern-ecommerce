@@ -27,7 +27,7 @@ function AdminProducts() {
 const getProducts = async () => {
     try {
         const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/api/products`
+            `${import.meta.env.VITE_API_URL}/api/products?limit=100`
         );
 
         const data = await response.json();
